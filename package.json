@@ -1,0 +1,21 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "A NodeJS E-Commerce Site",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server -w ejs,js,css",
+    "start": "node server.js"
+  },
+  "author": "Shankhadeep Biswas",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
