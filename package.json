@@ -4,7 +4,7 @@
   "description": "A NodeJS E-Commerce Site",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server -w ejs,js,css",
+    "dev": "nodemon server -e ejs,js,css",
     "start": "node server.js"
   },
   "author": "Shankhadeep Biswas",
