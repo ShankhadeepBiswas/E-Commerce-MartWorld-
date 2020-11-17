@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server -e ejs,js,css",
-    "start": "node server.js"
+    "start": "node server.js",
+    "push": "git push -u origin main"
   },
   "author": "Shankhadeep Biswas",
   "license": "ISC",
