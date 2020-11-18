@@ -1,5 +1,5 @@
-require('./src/db')
 require('dotenv').config()
+require('./src/db')
 const port = process.env.PORT 
 const express = require('express')
 const app = express()
@@ -10,7 +10,6 @@ const path = require('path')
 app.use('/public',express.static('public'))                               //Static files
 
 app.set('view engine','ejs')
-
 app
 .get('/home',(req,res)=>{
     res.render('home')
