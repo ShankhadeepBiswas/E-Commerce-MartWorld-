@@ -10,11 +10,14 @@ const path = require('path')
 app.use('/public',express.static('public'))                               //Static files
 
 app.set('view engine','ejs')
+
 app
 .get('/home',(req,res)=>{
     res.render('home')
 }) 
-
+.post('/signup',(req,res)=>{
+    
+})
 
 
 .get('*',(req,res)=>{

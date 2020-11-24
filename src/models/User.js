@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-const Task = require('../models/tasks')
 const userSchema=new mongoose.Schema({
     name : {
         type : String,
@@ -28,8 +27,8 @@ const userSchema=new mongoose.Schema({
         trim : true,
         minlength : 7,
         validate(value){
-            if ( value.toLowerCase().includes("password")){
-                throw new Error("INVALID PASSWORD!")
+            if ( value.toLowerCase().includes("password" || "hello")){
+                throw new Error("GIVE A STRONGER PASSWORD!")
             }
         }
     },
@@ -55,10 +54,10 @@ const userSchema=new mongoose.Schema({
 },{
     timestamps : true
 })
-userSchema.virtual('tasks',{
-    ref : 'Task',
+userSchema.virtual('products',{
+    ref : 'Product',
     localField:'_id',
-    foreignField: 'owner'
+    foreignField: 'buyer'
 })
 userSchema.methods.toJSON = function (){
     const userObject = this.toObject()
@@ -70,7 +69,7 @@ userSchema.methods.toJSON = function (){
 }
 userSchema.methods.getAuthToken =async function (){
     const user = this
-    const token= jwt.sign({_id : user._id.toString()},process.env.JWT_SECRET,{expiresIn : '1 day'})
+    const token= jwt.sign({_id : user._id.toString()},process.env.JWT_SECRET,{expiresIn : '1 hour'})
     user.tokens= user.tokens.concat({token})
     await user.save()
     return token;
@@ -94,7 +93,7 @@ userSchema.pre('save', async function (next){
 })
 userSchema.pre('remove', async function (next){
     const user = this;
-    await Task.deleteMany({ owner : user._id})
+    await Product.deleteMany({ buyer : user._id})
     next();
 })
 const User= mongoose.model('User',userSchema)
