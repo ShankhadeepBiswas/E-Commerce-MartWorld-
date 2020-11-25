@@ -8,17 +8,14 @@ const path = require('path')
 
 //Middleware
 app.use('/public',express.static('public'))                               //Static files
-
+app.use('/auth',require('./src/routers/auth'))
+app.use('/products',require('./src/routers/product'))
 app.set('view engine','ejs')
 
 app
 .get('/home',(req,res)=>{
     res.render('home')
 }) 
-.post('/signup',(req,res)=>{
-    
-})
-
 
 .get('*',(req,res)=>{
     res.status(404).render('error')
