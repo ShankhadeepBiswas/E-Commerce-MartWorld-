@@ -6,6 +6,11 @@ const productSchema = new mongoose.Schema({
         minlength: 1,
         trim : true
     },
+    details:{
+        type:String,
+        required:true,
+        minlength:[10, 'Be more informative']
+    },
     price:{
         type:mongoose.Schema.Types.Decimal128,
         required:true

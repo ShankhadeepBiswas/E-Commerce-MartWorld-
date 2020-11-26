@@ -4,41 +4,35 @@ const bcrypt = require('bcryptjs');
 
 const router = Router();
 
-const createToken = () => {
-  return jwt.sign({}, 'secret', { expiresIn: '1h' });
-};
+router.post('/signup',async (req,res)=>{
+  try{
+      const user = new User(req.body);
+      WelcomeEmail(user.email,user.name)
+      const token = await user.getAuthToken()
+      res.status(201).send({user,token});
+  }catch(e){
+      res.status(400).send(e);
+  }
+})
+router.post('/login',async (req,res)=>{
+  try{
+      const user = await User.findByCredentials(req.body.email,req.body.password)
+      const token = await user.getAuthToken()
+      res.send({user,token});
+  }catch(e){
+      res.status(400).send(e);
+  }
+})
+router.post('/logout',auth,async (req,res)=>{
+  try{
+  const user = req.user;
+  user.tokens = user.tokens.filter((obj)=> obj.token !== req.token)
+  await user.save();
+  res.send('Logout Successful!')
+  }catch(e){
+  res.status(500).send(e);
+  }
+})
 
-router.post('/login', (req, res, next) => {
-  const email = req.body.email;
-  const pw = req.body.password;
-  // Check if user login is valid
-  // If yes, create token and return it to client
-  const token = createToken();
-  // res.status(200).json({ token: token, user: { email: 'dummy@dummy.com' } });
-  res
-    .status(401)
-    .json({ message: 'Authentication failed, invalid username or password.' });
-});
-
-router.post('/signup', (req, res, next) => {
-  const email = req.body.email;
-  const pw = req.body.password;
-  // Hash password before storing it in database => Encryption at Rest
-  bcrypt
-    .hash(pw, 12)
-    .then(hashedPW => {
-      // Store hashedPW in database
-      console.log(hashedPW);
-      const token = createToken();
-      res
-        .status(201)
-        .json({ token: token, user: { email: 'dummy@dummy.com' } });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json({ message: 'Creating the user failed.' });
-    });
-  // Add user to database
-});
 
 module.exports = router;
