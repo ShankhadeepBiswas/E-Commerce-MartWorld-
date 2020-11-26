@@ -13,5 +13,10 @@ const productSchema = new mongoose.Schema({
     img:{
         type:String,
         default:'localhost:3000/public/images/grocery-15.svg'
+    },
+    buyer:{
+        
     }
 })
+const Product = mongoose.model('Product',productSchema)
+module.exports = Product
