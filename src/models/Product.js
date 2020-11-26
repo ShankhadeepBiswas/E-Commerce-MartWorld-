@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
         trim : true
     },
     price:{
-        type:mongoose.Types.Decimal128,
+        type:mongoose.Schema.Types.Decimal128,
         required:true
     },
     img:{
@@ -15,8 +15,10 @@ const productSchema = new mongoose.Schema({
         default:'localhost:3000/public/images/grocery-15.svg'
     },
     buyer:{
-        
+        type: mongoose.Schema.Types.ObjectId
     }
+},{
+    timestamps:true
 })
 const Product = mongoose.model('Product',productSchema)
 module.exports = Product
