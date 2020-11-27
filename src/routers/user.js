@@ -1,8 +1,4 @@
-const Router = require('express').Router;
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-
-const router = Router();
+const router = require('express').Router();
 
 router.post('/signup',async (req,res)=>{
   try{
@@ -23,7 +19,7 @@ router.post('/login',async (req,res)=>{
       res.status(400).send(e);
   }
 })
-router.post('/logout',auth,async (req,res)=>{
+router.post('/logout',async (req,res)=>{
   try{
   const user = req.user;
   user.tokens = user.tokens.filter((obj)=> obj.token !== req.token)
@@ -33,6 +29,5 @@ router.post('/logout',auth,async (req,res)=>{
   res.status(500).send(e);
   }
 })
-
 
 module.exports = router;

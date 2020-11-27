@@ -1,5 +1,4 @@
-const Router = require('express').Router;
-const router = Router();
+const router = require('express').Router();
 const obID = require('mongodb').ObjectID
 const Decimal128 = require('mongodb').Decimal128
 const db = require('../db')

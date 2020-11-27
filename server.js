@@ -8,12 +8,13 @@ const path = require('path')
 
 //Middleware
 app.use('/public',express.static('public'))                               //Static files
-app.use('/auth',require('./src/routers/auth'))
+app.set('view engine','ejs')                                              //View Engine
+app.use('/user',require('./src/routers/user'))                            //routers
 app.use('/products',require('./src/routers/product'))
-app.set('view engine','ejs')
+
 
 app
-.get('/home',(req,res)=>{
+.get('/',(req,res)=>{
     res.render('home')
 }) 
 
