@@ -99,7 +99,7 @@ router.post('', (req, res, next) => {
     name: req.body.name,
     description: req.body.description,
     price: Decimal128.fromString(req.body.price.toString()), // store this as 128bit decimal in MongoDB
-    image: req.body.image
+    image: req.body.img
   };
   db
     .getDb()

@@ -16,6 +16,9 @@ app.use('/products',require('./src/routers/product'))
 app
 .get('/',(req,res)=>{
     res.render('home')
+})
+.get('/main',(req,res)=>{
+    res.render('main')
 }) 
 
 .get('*',(req,res)=>{

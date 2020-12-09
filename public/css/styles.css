@@ -5,6 +5,8 @@
 }
 
 .nam{
+    letter-spacing: 2px;
+    margin-left: 2px;
     color: royalblue;
     font-size: 20px;
     font-weight: bolder;
@@ -12,7 +14,7 @@
 }
 
 #logo{
-    width: 4%;
+    width: 43px;
     border-radius: 50% ;
 }
 .nav-bar{
@@ -45,15 +47,19 @@ li{
     font-size: 1.3rem;
     transition: .5s;
 }
-span{
+a{
     display: block;
     font-size: .8rem;
     transform: translateY(-20px);
     transition: .5s cubic-bezier(.75,-1,0,1.15);
+    text-decoration: none;
+
 }
 li:hover .fa{
     transform: translateY(-100px);
 }
-li:hover span{
+li:hover a{
     transform: translateY(-70px);
+    color: seagreen;
+    text-decoration: none;
 }
